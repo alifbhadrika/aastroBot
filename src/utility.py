@@ -22,7 +22,6 @@ task_id = None
 selesai = None
 topik = None
 
-kalimat = 'Halo bot, task 9 hari tolong ingetin aku ya ada pada 14-12-2012 14 oktober 2021 tubes if2211 bab 2 sampai 3 cacatt loo'
 
 def getDate(S):
     ''' return komponen date pada string S '''
@@ -56,12 +55,18 @@ def getTaskId(S):
 def findAllDate(S):
     ''' return list of komponen date pada string S '''
     date = []
-    date1 = re.search(date1pattern,S)
-    date2 = re.search(date2pattern,S)
-    if (date1):
-        date.append(date1.group())
-    if (date2):
-        date.append(date2.group())
+    date1 = re.findall(date1pattern,S)
+    date2 = re.findall(date2pattern,S)
+    for i in range(len(date1)):
+        newdate1 = re.search(date1pattern,S)
+        S = re.sub(date1pattern,'done',S,1)
+        if (newdate1):
+            date.append(newdate1.group())
+    for i in range(len(date2)):
+        newdate2 = re.search(date2pattern,S)
+        S = re.sub(date2pattern,'done',S,1)
+        if (newdate2):
+            date.append(newdate2.group())
     return date
 
 
@@ -152,8 +157,7 @@ def getKeyword(S):
     return kata penting di string S
     '''
     for kata in keywords:
-        keyword = kmp(S,kata)
-        if (keyword != -1):
+        if (kata.lower() in S.lower().split(' ')):
             return kata
     return -1
 
@@ -173,5 +177,6 @@ def isRemove(S):
     return kmp(S,"selesai mengerjakan") != -1 and bm(S,"selesai mengerjakan") != -1
 
 if __name__ == "__main__":
+    kalimat = 'Halo bot, task ong ingetin aku ya ada pada  14/12/2021 14/10/2021 tubes if2211 bab 2 sampai 3 cacatt loo'
     inspectQuery(kalimat)
     print(tanggal_period,tanggal,kodematkul, topik)

@@ -63,7 +63,7 @@ def getSuitableResponses(text):
 if __name__ == "__main__":
     q.checkTasks()
     print("Masukkan pesan: ", end = "")
-    text = "deadline tubes if2210 kapan ya brok?"
+    text = input()
     getSuitableResponses(text)
-    # print(u.task_id, u.tanggal)
+    print(u.tanggal,u.tanggal_period,u.keyword)
     # getSuitableResponses(text)
