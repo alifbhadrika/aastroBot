@@ -1,10 +1,11 @@
-from flask import Flask
-app = Flask(__name__)
+from flask import Flask, render_template, request
 
+app = Flask(__name__)
+app.static_folder = 'static'
 
 @app.route('/')
-def hello():
-    return "Hello World!"
+def home():
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run()

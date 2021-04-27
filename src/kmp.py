@@ -35,7 +35,7 @@ def border(pattern):
             i += 1
     return fail
 
-if name == __main__:
+if __name__ == "__main__":
     text = input("Text: ")
     pattern = input("Pattern: ")
     idx = kmp(text,pattern)
