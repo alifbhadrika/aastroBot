@@ -10,31 +10,35 @@ keywords = {'tubes','quiz','tucil','tubes','pr'}
 months_synonym = {'agu' : 'aug', 'mei' : 'may', 'des' : 'dec', 'okt' : 'oct'}
 
 
-kalimat = 'Halo bot, tolong ingetin aku 3 hari ya ada pada 14-10-2012 sampai 13 oktober 2021 tubes if2211 bab 2 sampai 3 cacatt loo'
+kalimat = 'Halo bot, tolong ingetin aku 3 hari ya ada pada 14-12-2012 sampai 13 oktober 2021 tubes if2211 bab 2 sampai 3 cacatt loo'
 
 date1pattern = r'(\d{2})[/-](\d{2})[/-](\d{4})'
 date2pattern = r'(\b\d{1,2}\D{0,3})?\b(?:[jJ]an(?:uari)?|[fF]eb(?:ruari)?|[mA]ar(?:et)?|[aA]pr(?:il)?|[mM]ei|[jJ]un(?:i)?|[jJ]ul(?:i)?|[aA]ug(?:ust)?|[aA]gustus?|[sS]ep(?:tember)?|[oO][ck]t(?:ober)?|([nN]ov|[dD]e[cs])(?:ember)?)\D?(\d{1,2}\D?)?\D?((19[7-9]\d|20\d{2})|\d{2})'
 kodepattern = r'([kK][uU]|[iI][fF])(\d{2})(\d{2})'
 timeperiodpattern = r'\b[0-9]+?\b\s([hH]ari|[mM]inggu)'
 
-
-def timeperiod(S):
-    time = re.search(timeperiodpattern,S)
-    if time:
-        return time.group()
-    
-
-print(timeperiod(kalimat))
-
 def findalldate(S):
     date = []
     date1 = re.search(date1pattern,S)
     date2 = re.search(date2pattern,S)
-    date.append(str(date1.group()))
-    date.append(str(date2.group()))
+    if (date1):
+        date.append(str(date1.group()))
+    if (date2):
+        date.append(str(date2.group()))
     return date
 
 print(findalldate(kalimat))
+
+def timeperiod(S):
+    period = re.search(timeperiodpattern,S)
+    if not period:
+        period = findalldate(S)
+        if (len(period) > 1):
+            return period
+    return period.group()
+  
+print(timeperiod(kalimat).split(' '))
+
 
 def date(S):
     date = re.search(date1pattern,S)
