@@ -2,6 +2,8 @@ def kmp(text, pattern):
     '''
     Melakukan searching pattern pada text yang ada
     '''
+    text = text.lower()
+    pattern = pattern.lower()
     n = len(text)
     m = len(pattern)
     # print(n,m)
@@ -42,6 +44,5 @@ if __name__ == "__main__":
     text = input("Text: ")
     pattern = input("Pattern: ")
     idx = kmp(text,pattern)
-    print("Kata text ditemukan di indeks ke "+i+" pada pattern")
-    print(idx)
+    print("Kata text ditemukan di indeks ke "+str(idx)+" pada pattern")
     

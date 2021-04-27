@@ -34,13 +34,26 @@ def create_db():
     conn.commit()
     conn.close()
 
-def check():
+def checkKataPenting():
     db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
     conn = sqlite3.connect(db)
     c = conn.cursor()
     c.execute("""
     SELECT *
     FROM kata_penting
+    """)
+    res = c.fetchall()
+    print(res)
+    conn.commit()
+    conn.close()
+
+def checkTasks():
+    db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
+    conn = sqlite3.connect(db)
+    c = conn.cursor()
+    c.execute("""
+    SELECT *
+    FROM tasks
     """)
     res = c.fetchall()
     print(res)
@@ -58,13 +71,71 @@ def addTask(entry):
     conn.commit()
     conn.close()
 
-create_db()
-# def removeTask(id):
-#     conn = sqlite3.connect("../test/aastrobot.db")
-#     c = conn.cursor()
-#     c.execute("DELETE FROM tasks WHERE id =", id)
-#     print("Berhasil menghapuskan task", end=" ")
-#     print(id, end=" ")
-#     print("dari data tasks")
-#     conn.commit()
-#     conn.close()
+def updateTask(id_task, tanggal):
+    db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
+    conn = sqlite3.connect(db)
+    c = conn.cursor()
+    updated = True
+    try:
+        c.execute("UPDATE tasks SET tanggal = ? WHERE id_task = ?", (tanggal, id_task,))
+        print("Berhasil mengupdate task", end=" ")
+        print(id_task, end=" dari data tasks")
+    except:
+        updated = False
+    conn.commit()
+    conn.close()
+    return updated
+    
+def removeTask(id_task):
+    print(id_task)
+    print(type(id_task))
+    db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
+    conn = sqlite3.connect(db)
+    c = conn.cursor()
+    removed = True
+    try:
+        c.execute("DELETE FROM tasks WHERE id_task = ?", (id_task,))
+        print("Berhasil menghapuskan task", end=" ")
+        print(id_task, end=" dari data tasks")    
+    except:
+        removed = False
+    conn.commit()
+    conn.close()
+    return removed
+
+def getLastId():
+    db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
+    conn = sqlite3.connect(db)
+    c = conn.cursor()
+    c.execute("SELECT MAX(id_task) FROM tasks")
+    result = c.fetchone()
+    conn.commit()
+    conn.close()
+    return result
+
+if __name__ == "__main__":
+    # create_db()
+    end = False
+    checkTasks()
+    '''
+    id_task, tanggal, mata_kuliah, jenis_tugas, topik_tugas,
+    '''
+    while not end:
+        x = int(input())
+        if (x == 0):
+            entry = input().split()
+            addTask(entry)
+            checkTasks()
+        elif (x==1):
+            id, tanggal = input().split()
+            updateTask(int(id),tanggal)
+            checkTasks()
+        elif (x==2):
+            id = int(input())
+            removeTask(id)
+            checkTasks()
+        elif (x==3):
+            print(getLastId())
+        else:
+            end = True
+    create_db()
