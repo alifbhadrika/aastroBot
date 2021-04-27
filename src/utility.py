@@ -13,15 +13,24 @@ timeperiodpattern = r'\b[0-9]+?\b\s([hH]ari|[mM]inggu)'
 todaypattern = r'\b[hH]ari\b\sini'
 taskidpattern = r'\b[tT]ask\b\s[0-9]+?\b'
 
+keyword = None
+kodematkul = None
+tanggal = None
+tanggal_period = None
+deadline = None
+task_id = None
+selesai = None
+topik = None
 
-kalimat = 'Halo bot, hari task 9 ini tolong ingetin aku ya ada pada 14-12-2012 tubes if2211 bab 2 sampai 3 cacatt loo'
+kalimat = 'Halo bot, task 9 hari tolong ingetin aku ya ada pada 14-12-2012 14 oktober 2021 tubes if2211 bab 2 sampai 3 cacatt loo'
 
 def getDate(S):
+    ''' return komponen date pada string S '''
     date = re.search(date1pattern,S)
     if not date:
         date = re.search(date2pattern,S)
         if (not date):
-            return
+            return -1
         datelist = date.group().split(' ')
         datelist[1] = datelist[1][0:3]
         month = datelist[1]
@@ -37,52 +46,69 @@ def getDate(S):
     return dt.date()
 
 def getTaskId(S):
+    ''' return id task string S '''
     taskid = re.search(taskidpattern,S)
     if taskid:
-        return taskid.group().split(' ')[1]
+        return int(taskid.group().split(' ')[1])
+    return -1
 
 
 def findAllDate(S):
+    ''' return list of komponen date pada string S '''
     date = []
     date1 = re.search(date1pattern,S)
     date2 = re.search(date2pattern,S)
     if (date1):
-        date.append(getDate(date1.group()))
+        date.append(date1.group())
     if (date2):
-        date.append(getDate(date2.group()))
+        date.append(date2.group())
     return date
 
 
 def getDatePeriod(S):
+    ''' 
+    return komponen date period pada string S
+    [2020-12-21, 2021-12-21] dimana elmt pertama
+    adalah start date dan elmt ke-2 adalah enddate
+    '''
     timeperiod = []
-    period = re.search(timeperiodpattern,S)
-    if not period:
-        period = findAllDate(S)
-        if (len(period) < 2):
-            return
-        timeperiod.append(getDate(period[0]))
-        timeperiod.append(getDate(period[1]))
+    if bm(S,'hari ini') != -1:
+        enddate = date.today()
+        timeperiod.append(date.today())
+        timeperiod.append(enddate)
         return timeperiod
-    period = period.group().split(' ')
-    if period[1] == 'minggu':
-        enddate = date.today() + timedelta(days=int(period[0])*7)
-    else :
-        enddate = date.today() + timedelta(days=int(period[0]))
-    timeperiod.append(date.today())
-    timeperiod.append(enddate)
-    return timeperiod
+    else:
+        period = re.search(timeperiodpattern,S)
+        if not period:
+            period = findAllDate(S)
+            if (len(period) < 2):
+                return -1
+            timeperiod.append(getDate(period[0]))
+            timeperiod.append(getDate(period[1]))
+            return timeperiod
+        period = period.group().split(' ')
+        if kmp('minggu',period[1]) != -1:
+            enddate = date.today() + timedelta(days=int(period[0])*7)
+        elif kmp('hari',period[1]) != -1 :
+            enddate = date.today() + timedelta(days=int(period[0]))
+        timeperiod.append(date.today())
+        timeperiod.append(enddate)
+        return timeperiod
+
 
 def getKodeMatkul(S):
+    ''' return kode matkul pada string S'''
     kode = re.search(kodepattern,S)
     if (kode):
         return kode.group().upper()
-    return
+    return -1
 
 def getTopik(S):
+    ''' return topik tugas pada string S '''
     kode = re.search(kodepattern,S)
     if (kode):
         return str(S.partition(kode.group()+str(' '))[2])
-    return
+    return -1
 
 
 def inspectQuery(S):
@@ -100,17 +126,16 @@ def inspectQuery(S):
     kodematkul = getKodeMatkul(S)
     spektask = getTopik(S)
 
-'''
-keyword = None
-kodematkul = None
-tanggal = None
-tanggal_period = None
-deadline = None
-task_id = None
-selesai = None
-topik = None
-
+    if (tanggal != -1 and keyword != -1 and topik != -1):
+        return 1
+    elif (deadline != -1 or keyword != -1):
+        if (tanggal_period == -1 and keyword == -1):
+            return 2
+        elif (tanggal_period != -1 and keyword == -1) :
+            return 3
+        elif (tanggal_period != -1 and keyword != -1) :
+            return 4
+        
 
 inspectQuery(kalimat)
 print(tanggal_period,tanggal,kodematkul)
-'''
