@@ -20,7 +20,12 @@ def clean_text(text):
 def getSuitableResponses(text):
     ret = u.inspectQuery(text)
     if (ret == 1):
-        print("1")
+        # Add Task
+        if (q.addTaskThroughBot(u.tanggal, u.keyword, u.topik, u.kodematkul)):
+            return "Added"
+        else:
+            print("not added")
+            return "not Added"
     elif (ret == 2):
         # Melihat daftar task
         q.checkTasks()

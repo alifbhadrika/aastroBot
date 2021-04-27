@@ -88,6 +88,24 @@ def addTask(entry):
     conn.commit()
     conn.close()
 
+def addTaskThroughBot(tanggal, keyword, topik, kodematkul):
+    db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
+    conn = sqlite3.connect(db)
+    c = conn.cursor()
+    idx = 1
+    if (getLastId() != None):
+        idx = getLastId() + 1
+    added = True
+    try:
+        entry = (idx, tanggal, kodematkul, keyword, topik,)
+        c.execute("INSERT INTO tasks VALUES(?,?,?,?,?)", entry)
+        print("done")
+    except:
+        added = False
+    conn.commit()
+    conn.close()
+    return added
+
 def updateTask(id_task, tanggal):
     db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
     conn = sqlite3.connect(db)
@@ -128,7 +146,7 @@ def getLastId():
     result = c.fetchone()
     conn.commit()
     conn.close()
-    return result
+    return result[0]
 
 def checkTaskDatePeriod(startdate, enddate):
     db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
@@ -149,6 +167,7 @@ def checkSpecificTaskDatePeriod(task, startdate, enddate):
     print(res)
     conn.commit()
     conn.close()
+
 if __name__ == "__main__":
     # create_db()
     end = False
