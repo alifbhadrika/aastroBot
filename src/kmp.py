@@ -6,6 +6,8 @@ def kmp(text, pattern):
     pattern = pattern.lower()
     n = len(text)
     m = len(pattern)
+
+    fail = border(pattern)
     # print(n,m)
     i = 0
     j = 0
@@ -16,13 +18,13 @@ def kmp(text, pattern):
             i += 1
             j += 1
         elif (j > 0):
-            j = border(j-1)
+            j = fail[j-1]
         else:
             i += 1     
     return -1
 
 def border(pattern):
-    fail = []
+    fail = ["" for i in range(len(pattern))]
     fail[0] = 0
 
     m = len(pattern)
