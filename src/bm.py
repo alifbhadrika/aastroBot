@@ -9,6 +9,8 @@ def buildLastArray(stringInput):
     return last
 
 def bm(text,stringInput):
+    text = text.lower()
+    stringInput = stringInput.lower()
     last = buildLastArray(stringInput)
     n = len(text)
     m = len(stringInput)
