@@ -2,6 +2,7 @@ import re
 import itertools
 import sys
 import utility as u
+import query as q
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from datetime import datetime
@@ -29,13 +30,25 @@ def getSuitableResponses(text):
     elif (ret == 5):
         print("5")        
     elif (ret == 6):
-        print("6")
+        # Update
+        if (q.updateTask(u.task_id,u.tanggal)):
+            return "Berhasil memperbarui deadline task ke "+str(task_id)+" menjadi "+str(tanggal)+" pada daftar task"
+        else:
+            return "Tidak terdapat task ke "+str(task_id)+" pada daftar task"
     elif (ret == 7):
-        print("7")        
+        # Delete
+        task_id = u.getTaskId()
+        if (q.removeTask(task_id)):
+            return "Berhasil menghapuskan task ke "+str(task_id)+" pada daftar task"
+        else:
+            return "Tidak terdapat task ke "+str(task_id)+" pada daftar task"
     else:
-        print("-1")        
+        return """Maaf pesan tidak dikenali, anda dapat menuliskan "Apa yang bisa bot lakukan" untuk mengetahui daftar fitur"""
 
 if __name__ == "__main__":
+    q.checkTasks()
     print("Masukkan pesan: ", end = "")
-    text = input()
+    text = ""
     getSuitableResponses(text)
+    # print(u.task_id, u.tanggal)
+    # getSuitableResponses(text)

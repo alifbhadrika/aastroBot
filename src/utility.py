@@ -122,7 +122,7 @@ def inspectQuery(S):
     global topik
     keyword = getKeyword(S)
     tanggal_period = getDatePeriod(S)
-    if not tanggal_period:
+    if tanggal_period == -1:
         tanggal = getDate(S)
     kodematkul = getKodeMatkul(S)
     topik = getTopik(S)
@@ -161,8 +161,7 @@ def isUpdate(S):
     dan kata deadline muncul sebelum diundur
     '''
     deadline = kmp(S,"deadline")
-    diundur = kmp(S,"diundur")
-    return getDate(S) != -1 and deadline != -1 and diundur != -1 and deadline < diundur
+    return getDate(S) != -1 and deadline != -1
 
 def isRemove(S):
     '''
@@ -171,5 +170,6 @@ def isRemove(S):
     '''
     return kmp(S,"selesai mengerjakan") != -1 and bm(S,"selesai mengerjakan") != -1
 
-inspectQuery(kalimat)
-print(tanggal_period,tanggal,kodematkul, topik)
+if __name__ == "__main__":
+    inspectQuery(kalimat)
+    print(tanggal_period,tanggal,kodematkul, topik)
