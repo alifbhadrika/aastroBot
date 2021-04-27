@@ -125,6 +125,7 @@ def inspectQuery(S):
         tanggal = getDate(S)
     kodematkul = getKodeMatkul(S)
     spektask = getTopik(S)
+    task_id = getTaskId(S)
 
     if (tanggal != -1 and keyword != -1 and topik != -1):
         return 1
@@ -135,7 +136,29 @@ def inspectQuery(S):
             return 3
         elif (tanggal_period != -1 and keyword != -1) :
             return 4
-        
+    
+    elif (isUpdate(S)):
+        return 6
+    elif (isRemove(S)):
+        return 7        
+    else:
+        return -1
+
+def isUpdate(S):
+    '''
+    Mengembalikan true jika terdapat tanggal dan kata deadline dan diundur
+    dan kata deadline muncul sebelum diundur
+    '''
+    deadline = kmp(S,"deadline")
+    diundur = kmp(S,"diundur")
+    return getDate(S) != -1 and deadline != -1 and diundur != -1 and deadline < diundur
+
+def isRemove(S):
+    '''
+    Mengembalikan true jika terdapat kata 'selesai mengerjakan'
+    delete dari task
+    '''
+    return kmp(S,"selesai mengerjakan") != -1 and bm(S,"selesai mengerjakan") != -1
 
 inspectQuery(kalimat)
-print(tanggal_period,tanggal,kodematkul)
+print(tanggal_period,tanggal,kodematkul, topik)

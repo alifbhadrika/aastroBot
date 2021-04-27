@@ -1,10 +1,11 @@
 import re
 import itertools
 import sys
+import utility as u
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from datetime import datetime
-from kmp import *
+
 
 def clean_text(text):
     '''
@@ -16,29 +17,23 @@ def clean_text(text):
     return text
 
 def getSuitableResponses(text):
-    if (isAddTask(text)):
-        # TODO
-        print("TODO")    
-    elif (isShowTask(text)):
-        # TODO
-        print("TODO")
-    elif (isShowDeadline(text)):
-        # TODO
-        print("TODO")
-    elif (isUpdateTask(text)):
-        # TODO
-        print("TODO")
-    elif (isRemoveTask(text)):
-        # TODO
-        print("TODO")
-    elif (isHelp(text)):
-        # Ini bagian help
-        print("Bot ini bisa mencatat dan memberitahu deadline tugas")
+    ret = u.inspectQuery(text)
+    if (ret == 1):
+        print("1")
+    elif (ret == 2):
+        print("2")
+    elif (ret == 3):
+        print("3")
+    elif (ret == 4):
+        print("4")
+    elif (ret == 5):
+        print("5")        
+    elif (ret == 6):
+        print("6")
+    elif (ret == 7):
+        print("7")        
     else:
-        # Ini eror kalo gaada yang dikenalin
-        response = "Maaf, saya tidak mengerti apa maksud anda. Coba tanyakan 'Apa yang bisa bot lakukan?' untuk melihat daftar perintah"
-        print(response)
-        return response
+        print("-1")        
 
 if __name__ == "__main__":
     print("Masukkan pesan: ", end = "")
