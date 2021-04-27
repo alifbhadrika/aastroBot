@@ -1,7 +1,10 @@
 def kmp(text, pattern):
+    '''
+    Melakukan searching pattern pada text yang ada
+    '''
     n = len(text)
     m = len(pattern)
-    print(n,m)
+    # print(n,m)
     i = 0
     j = 0
     while (i < n):

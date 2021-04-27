@@ -1,7 +1,9 @@
 import sqlite3
+import os
 
 def create_db():
-    conn = sqlite3.connect("aastrobot.db")
+    db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
+    conn = sqlite3.connect(db)
     c = conn.cursor()
     c.execute('DROP TABLE IF EXISTS kata_penting')
     c.execute("""
@@ -33,7 +35,8 @@ def create_db():
     conn.close()
 
 def check():
-    conn = sqlite3.connect("aastrobot.db")
+    db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
+    conn = sqlite3.connect(db)
     c = conn.cursor()
     c.execute("""
     SELECT *
@@ -45,7 +48,8 @@ def check():
     conn.close()
 
 def addTask(entry):
-    conn = sqlite3.connect("aastrobot.db")
+    db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
+    conn = sqlite3.connect(db)
     c = conn.cursor()
     c.execute("INSERT INTO tasks VALUES(?,?,?,?,?)", entry)
     print("Berhasil menambahkan record", end=" ")
@@ -53,3 +57,14 @@ def addTask(entry):
     print("ke data tasks")
     conn.commit()
     conn.close()
+
+create_db()
+# def removeTask(id):
+#     conn = sqlite3.connect("../test/aastrobot.db")
+#     c = conn.cursor()
+#     c.execute("DELETE FROM tasks WHERE id =", id)
+#     print("Berhasil menghapuskan task", end=" ")
+#     print(id, end=" ")
+#     print("dari data tasks")
+#     conn.commit()
+#     conn.close()
