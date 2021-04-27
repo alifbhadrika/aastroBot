@@ -114,6 +114,25 @@ def getLastId():
     conn.close()
     return result
 
+def checkTaskDatePeriod(startdate, enddate):
+    db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
+    conn = sqlite3.connect(db)
+    c = conn.cursor()
+    c.execute("SELECT * FROM tasks WHERE tanggal BETWEEN ? AND ?",(startdate, enddate))
+    res = c.fetchall()
+    print(res)
+    conn.commit()
+    conn.close()
+
+def checkSpecificTaskDatePeriod(task, startdate, enddate):
+    db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
+    conn = sqlite3.connect(db)
+    c = conn.cursor()
+    c.execute("SELECT * FROM tasks WHERE jenis_tugas = ? AND (tanggal BETWEEN ? AND ?)",(task, startdate, enddate))
+    res = c.fetchall()
+    print(res)
+    conn.commit()
+    conn.close()
 if __name__ == "__main__":
     # create_db()
     end = False

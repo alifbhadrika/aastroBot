@@ -23,11 +23,17 @@ def getSuitableResponses(text):
         print("1")
     elif (ret == 2):
         # Melihat daftar task
-        print("2")
+        q.checkTasks()
     elif (ret == 3):
-        print("3")
+        # Melihat daftar task di periode waktu start dan date
+        startdate = u.tanggal_period[0]
+        enddate = u.tanggal_period[1]
+        q.checkTaskDatePeriod(startdate, enddate)
     elif (ret == 4):
-        print("4")
+        # Melihat daftar task di periode waktu start dan date
+        startdate = u.tanggal_period[0]
+        enddate = u.tanggal_period[1]
+        q.checkSpecificTaskDatePeriod(u.keyword, startdate, enddate)
     elif (ret == 5):
         print("5")        
     elif (ret == 6):
