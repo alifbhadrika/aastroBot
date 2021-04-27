@@ -29,13 +29,16 @@ def getSuitableResponses(text):
     elif (ret == 4):
         print("4")
     elif (ret == 5):
-        print("5")        
+        # Lokit Deadline   
+        deadline = q.getDeadline(u.kodematkul, u.keyword)
+        print(deadline)
+        return "Itu ya Deadlinenya"   
     elif (ret == 6):
         # Update
         if (q.updateTask(u.task_id,u.tanggal)):
-            return "Berhasil memperbarui deadline task ke "+str(task_id)+" menjadi "+str(tanggal)+" pada daftar task"
+            return "Berhasil memperbarui deadline task ke "+str(u.task_id)+" menjadi "+str(u.tanggal)+" pada daftar task"
         else:
-            return "Tidak terdapat task ke "+str(task_id)+" pada daftar task"
+            return "Tidak terdapat task ke "+str(u.task_id)+" pada daftar task"
     elif (ret == 7):
         # Delete
         task_id = u.getTaskId()
@@ -49,7 +52,7 @@ def getSuitableResponses(text):
 if __name__ == "__main__":
     q.checkTasks()
     print("Masukkan pesan: ", end = "")
-    text = ""
+    text = "deadline tubes if2210 kapan ya brok?"
     getSuitableResponses(text)
     # print(u.task_id, u.tanggal)
     # getSuitableResponses(text)
