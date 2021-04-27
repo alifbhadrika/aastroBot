@@ -4,7 +4,7 @@ from bm import *
 from kmp import *
 
 # chatbot utilities
-keywords = {'tubes','quiz','tucil','tubes','pr'}
+keywords = {'tubes','quiz','tucil','ujian','pr','praktikum'}
 months_synonym = {'agu' : 'aug', 'mei' : 'may', 'des' : 'dec', 'okt' : 'oct'}
 date1pattern = r'(\d{2})[/-](\d{2})[/-](\d{4})'
 date2pattern = r'(\b\d{1,2}\D{0,3})?\b(?:[jJ]an(?:uari)?|[fF]eb(?:ruari)?|[mA]ar(?:et)?|[aA]pr(?:il)?|[mM]ei|[jJ]un(?:i)?|[jJ]ul(?:i)?|[aA]ug(?:ust)?|[aA]gustus?|[sS]ep(?:tember)?|[oO][ck]t(?:ober)?|([nN]ov|[dD]e[cs])(?:ember)?)\D?(\d{1,2}\D?)?\D?((19[7-9]\d|20\d{2})|\d{2})'
@@ -120,11 +120,12 @@ def inspectQuery(S):
     global task_id
     global selesai
     global topik
+    keyword = getKeyword(S)
     tanggal_period = getDatePeriod(S)
     if not tanggal_period:
         tanggal = getDate(S)
     kodematkul = getKodeMatkul(S)
-    spektask = getTopik(S)
+    topik = getTopik(S)
     task_id = getTaskId(S)
 
     if (tanggal != -1 and keyword != -1 and topik != -1):
@@ -143,6 +144,16 @@ def inspectQuery(S):
         return 7        
     else:
         return -1
+
+def getKeyword(S):
+    '''
+    return kata penting di string S
+    '''
+    for kata in keywords:
+        keyword = kmp(S,kata)
+        if (keyword != -1):
+            return keyword
+    return -1
 
 def isUpdate(S):
     '''
