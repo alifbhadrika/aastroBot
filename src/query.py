@@ -18,7 +18,8 @@ def create_db():
         ("Ujian"),
         ("Tucil"),
         ("Tubes"),
-        ("Praktikum");
+        ("PR"),
+        ("Praktikum)";
     """)
     c.execute('DROP TABLE IF EXISTS tasks')
     c.execute("""

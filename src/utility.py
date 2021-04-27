@@ -4,7 +4,7 @@ from bm import *
 from kmp import *
 
 # chatbot utilities
-keywords = {'tubes','quiz','tucil','ujian','pr','praktikum'}
+keywords = {'Tubes','Quiz','Tucil','Ujian','PR','Praktikum'}
 months_synonym = {'agu' : 'aug', 'mei' : 'may', 'des' : 'dec', 'okt' : 'oct'}
 date1pattern = r'(\d{2})[/-](\d{2})[/-](\d{4})'
 date2pattern = r'(\b\d{1,2}\D{0,3})?\b(?:[jJ]an(?:uari)?|[fF]eb(?:ruari)?|[mA]ar(?:et)?|[aA]pr(?:il)?|[mM]ei|[jJ]un(?:i)?|[jJ]ul(?:i)?|[aA]ug(?:ust)?|[aA]gustus?|[sS]ep(?:tember)?|[oO][ck]t(?:ober)?|([nN]ov|[dD]e[cs])(?:ember)?)\D?(\d{1,2}\D?)?\D?((19[7-9]\d|20\d{2})|\d{2})'
@@ -152,7 +152,7 @@ def getKeyword(S):
     for kata in keywords:
         keyword = kmp(S,kata)
         if (keyword != -1):
-            return keyword
+            return kata
     return -1
 
 def isUpdate(S):

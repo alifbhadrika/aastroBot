@@ -22,6 +22,7 @@ def getSuitableResponses(text):
     if (ret == 1):
         print("1")
     elif (ret == 2):
+        # Melihat daftar task
         print("2")
     elif (ret == 3):
         print("3")
