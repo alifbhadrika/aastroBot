@@ -130,6 +130,8 @@ def inspectQuery(S):
 
     if (tanggal != -1 and keyword != -1 and topik != -1):
         return 1
+    elif (deadline != -1 and keyword != -1 and kodematkul != -1):
+        return 5
     elif (deadline != -1 or keyword != -1):
         if (tanggal_period == -1 and keyword == -1):
             return 2

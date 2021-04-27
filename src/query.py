@@ -19,7 +19,7 @@ def create_db():
         ("Tucil"),
         ("Tubes"),
         ("PR"),
-        ("Praktikum)";
+        ("Praktikum");
     """)
     c.execute('DROP TABLE IF EXISTS tasks')
     c.execute("""
@@ -60,6 +60,22 @@ def checkTasks():
     print(res)
     conn.commit()
     conn.close()
+
+def getDeadline(kodematkul, keyword):
+    db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
+    conn = sqlite3.connect(db)
+    c = conn.cursor()
+    toQuery = (kodematkul, keyword, )
+    c.execute("""
+    SELECT tanggal
+    FROM tasks
+    WHERE mata_kuliah = ? and jenis_tugas = ?
+    """, toQuery)
+    res = c.fetchall()
+    print(res)
+    conn.commit()
+    conn.close()
+    return res
 
 def addTask(entry):
     db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
