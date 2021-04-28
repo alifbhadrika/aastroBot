@@ -150,9 +150,9 @@ def inspectQuery(S):
         elif (tanggal_period != -1 and keyword != -1) :
             print(4)
             return 4
-    elif (isUpdate(S)):
-        print(6)
-        return 6
+        elif (tanggal != -1 and task_id != -1):
+            print(6)
+            return 6
     elif (isRemove(S)):
         print(7)
         return 7     

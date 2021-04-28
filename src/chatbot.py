@@ -11,7 +11,7 @@ def getSuitableResponses(text):
         # Add Task
         if (q.addTaskThroughBot(u.tanggal, u.keyword, u.topik, u.kodematkul)):
             idx = q.getLastId()
-            toReturn = "Task Added<br>" + "(ID:" + str(idx) + ") " + \
+            toReturn = "Task Added" + "(ID:" + str(idx) + ") " + \
                 str(u.tanggal) + " - " + str(u.kodematkul) + " - " + \
                 str(u.keyword) + " - " + str(u.topik)
             return toReturn
@@ -57,11 +57,10 @@ def getSuitableResponses(text):
             return "Tidak terdapat task ke "+str(u.task_id)+" pada daftar task"
     elif (ret == 7):
         # Delete
-        task_id = u.getTaskId()
-        if (q.removeTask(task_id)):
-            return "Berhasil menghapuskan task ke "+str(task_id)+" pada daftar task"
+        if (q.removeTask(u.task_id)):
+            return "Berhasil menghapuskan task ke "+str(u.task_id)+" pada daftar task"
         else:
-            return "Tidak terdapat task ke "+str(task_id)+" pada daftar task"
+            return "Tidak terdapat task ke "+str(u.task_id)+" pada daftar task"
     elif(ret == 8):
         # Help
         retval = '''
