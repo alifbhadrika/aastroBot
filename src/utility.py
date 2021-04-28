@@ -193,8 +193,8 @@ def isHelp(S):
     '''
     Mengembalikan true jika terdapat kata 'bisa lakukan' 'aastrobot' 'help'
     '''
-    helpflag1 = (bm(S,"bisa lakukan")!=-1)
-    return helpflag1 != -1 and keyword == -1 and tanggal == -1
+    helpflag1 = (bm(S,"bisa lakukan")!=-1) or (bm(S,"help")!=-1)
+    return helpflag1 and keyword == -1 and tanggal == -1
 
 if __name__ == "__main__":
     kalimat = 'Halo bot, task ong ingetin aku ya ada pada  14/12/2021 14/10/2021 tubes if2211 bab 2 sampai 3 cacatt loo'
