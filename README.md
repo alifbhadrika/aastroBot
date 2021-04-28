@@ -7,8 +7,7 @@
 * [Setup](#setup)
 * [Features](#features)
 * [Status](#status)
-* [Inspiration](#inspiration)
-* [Contact](#contact)
+* [Creator](#creator)
 
 ## General info
 ![Example screenshot](./img/screenshot.png)
