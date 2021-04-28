@@ -132,25 +132,33 @@ def inspectQuery(S):
     kodematkul = getKodeMatkul(S)
     topik = getTopik(S)
     task_id = getTaskId(S)
+    deadline = kmp(S,"deadline") or bm(S,"deadline")
 
-    if (tanggal != -1 and keyword != -1 and topik != -1):
+    if (isAdded()):
+        print(1)
         return 1
-    elif (deadline != -1 and keyword != -1 and kodematkul != -1):
-        return 5
-    elif (deadline != -1 or keyword != -1):
-        if (isHelp(S)):
-            return 8
-        elif (tanggal_period == -1 and keyword == -1):
+    elif (deadline != -1):
+        if (tanggal_period == -1 and keyword == -1):
+            print(2)
             return 2
-        elif (tanggal_period != -1 and keyword == -1) :
+        elif (tanggal_period != -1 and keyword == -1):
+            print(3)
             return 3
         elif (tanggal_period != -1 and keyword != -1) :
+            print(4)
             return 4
-    
+    elif (keyword != -1 and kodematkul != -1):
+        print(5)
+        return 5
     elif (isUpdate(S)):
+        print(6)
         return 6
     elif (isRemove(S)):
+        print(7)
         return 7     
+    elif (isHelp(S)):
+        print(8)        
+        return 8
     else:
         return -1
 
@@ -162,6 +170,9 @@ def getKeyword(S):
         if (kata.lower() in S.lower().split(' ')):
             return kata
     return -1
+
+def isAdded():
+    return (tanggal != -1 and kodematkul and keyword != -1 and topik != -1)
 
 def isUpdate(S):
     '''
@@ -181,9 +192,8 @@ def isRemove(S):
 def isHelp(S):
     '''
     Mengembalikan true jika terdapat kata 'bisa lakukan' 'aastrobot' 'help'
-    delete dari task
     '''
-    helpflag1 = bm(S,"bisa lakukan")
+    helpflag1 = (bm(S,"bisa lakukan")!=-1) or (bm(S,"help")!=-1)
     return helpflag1 != -1 and keyword == -1 and tanggal == -1
 
 if __name__ == "__main__":

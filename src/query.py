@@ -77,17 +77,6 @@ def getDeadline(kodematkul, keyword):
     conn.close()
     return res
 
-def addTask(entry):
-    db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
-    conn = sqlite3.connect(db)
-    c = conn.cursor()
-    c.execute("INSERT INTO tasks VALUES(?,?,?,?,?)", entry)
-    print("Berhasil menambahkan record", end=" ")
-    print(entry, end=" ")
-    print("ke data tasks")
-    conn.commit()
-    conn.close()
-
 def addTaskThroughBot(tanggal, keyword, topik, kodematkul):
     db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
     conn = sqlite3.connect(db)
@@ -193,4 +182,3 @@ if __name__ == "__main__":
             print(getLastId())
         else:
             end = True
-    create_db()

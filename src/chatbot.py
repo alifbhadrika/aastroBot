@@ -3,19 +3,7 @@ import itertools
 import sys
 import utility as u
 import query as q
-from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
-from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from datetime import datetime
-
-
-def clean_text(text):
-    '''
-    Melakukan stemming dan menghilangkan stopwords pada kalimat inputan
-    '''
-    stemmer = StemmerFactory().create_stemmer()
-    stopword = StopWordRemoverFactory().create_stop_word_remover()
-    text = stemmer.stem(stopword.remove(text))
-    return text
 
 def getSuitableResponses(text):
     ret = u.inspectQuery(text)
@@ -59,8 +47,7 @@ def getSuitableResponses(text):
             return "Tidak terdapat task ke "+str(task_id)+" pada daftar task"
     elif(ret == 8):
         # Help
-        return 
-        '''
+        retval = '''
         Hi!
         AastroBot adalah asisten pencatan tugas tugas kamu, biar kagak kelewat deadline mulu
         [Feature] 
@@ -78,14 +65,15 @@ def getSuitableResponses(text):
         5. PR
         6. Praktikum
         '''
+        return retval
     else:
         return """Maaf pesan tidak dikenali, anda dapat menuliskan "Apa yang bisa bot lakukan" untuk mengetahui daftar fitur"""
 
 if __name__ == "__main__":
     q.checkTasks()
     print("Masukkan pesan: ", end = "")
-    text = input()
-    getSuitableResponses(text)
-    print(u.inspectQuery(text))
-    print(u.tanggal,u.tanggal_period,u.keyword)
+    text = "Apa yang bot bisa lakukan?"
+    # print(getSuitableResponses(text))
+    # print(u.inspectQuery(text))
+    # print(u.tanggal,u.tanggal_period,u.keyword)
     # getSuitableResponses(text)

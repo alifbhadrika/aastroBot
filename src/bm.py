@@ -18,7 +18,6 @@ def bm(text,stringInput):
     j = m-1
 
     if (i>n-1):
-        print("pattern's longer than text, no match")
         return -1
     
     while (i<=n-1):
@@ -45,3 +44,7 @@ pat = "ayamgoreng"
 hasil = bm(text,pat)
 print(hasil)
 '''
+if __name__ == "__main__":
+    text = "test"
+    pattern = "deadline"
+    print(bm(text, pattern))
