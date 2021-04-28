@@ -1,0 +1,87 @@
+.wrapper {
+    width: 370px;
+    background: #ffff;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    border-top: 0px;
+}
+.wrapper .title{
+    background: #006fe6;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 60 px;
+    text-align: center;
+    border-bottom: 1px solid #006fe6;
+    border-radius: 5px 5px 0 0;
+}
+.wrapper .form {
+    padding: 20px 15px;
+    min-height: 400px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+.wrapper .form .inbox{
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+}
+.wrapper .form .inbox .msg-header{
+    max-width: 53%;
+    margin-left: 10px;
+}
+
+.form .inbox .msg-header p{
+    color: #fff;
+    background: #006fe6;
+    padding: 8px 10px;
+    font-size: 1rem;
+    border-radius: 10px;
+    word-break:break-all;
+}
+.wrapper .form .user-inbox{
+    justify-content: flex-end;
+    margin: 13px 0;
+}
+
+.wrapper .form .user-inbox p{
+    color: #333;
+    background: #efefef;
+}
+.wrapper .typing-field{
+    display: flex;
+    height: 60px;
+    align-items: center;
+    width: 100%;
+    justify-content: space-evenly;
+    background-color: #efefef;
+    border-top: 1px solid #d9d9dd;
+    border-radius: 0 0 5px 5px;
+
+}
+.wrapper .typing-field .input-data{
+    height: 40px;
+    width: 335px;
+    position: relative;
+}
+.wrapper .typing-field .input-data input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: 1px solid transparent;
+    padding: 0 80px 0 15px;
+    font-size: 1rem; 
+}
+.wrapper .typing-field .input-data button{
+    position: absolute;
+    background: #006fe6;
+    right: 5px;
+    top : 50%;
+    height: 30px;
+    width: 65px;
+    border: 1px solid #006fe6;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #fff;
+    border-radius: 5px;
+}
