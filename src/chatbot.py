@@ -33,8 +33,10 @@ def getSuitableResponses(text):
     elif (ret == 5):
         # Lokit Deadline   
         deadline = q.getDeadline(u.kodematkul, u.keyword)
-        print(deadline)
-        return "Itu ya Deadlinenya"   
+        toReturn = ""
+        for date in deadline:
+            toReturn += str(date) +"\n"
+        return toReturn
     elif (ret == 6):
         # Update
         if (q.updateTask(u.task_id,u.tanggal)):
@@ -76,7 +78,8 @@ if __name__ == "__main__":
     q.checkTasks()
     print("Masukkan pesan: ", end = "")
     text = "Apa yang bot bisa lakukan?"
-    # print(getSuitableResponses(text))
+    # toInput = input()
+    # print(getSuitableResponses(toInput))
     # print(u.inspectQuery(text))
     # print(u.tanggal,u.tanggal_period,u.keyword)
     # getSuitableResponses(text)
