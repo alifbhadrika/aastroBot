@@ -11,7 +11,7 @@ def getSuitableResponses(text):
         # Add Task
         if (q.addTaskThroughBot(u.tanggal, u.keyword, u.topik, u.kodematkul)):
             idx = q.getLastId()
-            toReturn = "Task Added\n" + "(ID:" + str(idx) + ") " + \
+            toReturn = "Task Added<br>" + "(ID:" + str(idx) + ") " + \
                 str(u.tanggal) + " - " + str(u.kodematkul) + " - " + \
                 str(u.keyword) + " - " + str(u.topik)
             return toReturn
@@ -22,7 +22,7 @@ def getSuitableResponses(text):
         tasks = q.checkTasks()
         toReturn = ""
         for task in tasks:
-            toReturn += str(task) + "\n"
+            toReturn += str(task) + "<br>"
         return toReturn
     elif (ret == 3):
         # Melihat daftar task di periode waktu start dan date
@@ -31,7 +31,7 @@ def getSuitableResponses(text):
         tasks = q.checkTaskDatePeriod(startdate, enddate)
         toReturn = ""
         for task in tasks:
-            toReturn += str(task) + "\n"
+            toReturn += str(task) + "<br>"
         return toReturn
     elif (ret == 4):
         # Melihat daftar task di periode waktu start dan date
@@ -40,14 +40,14 @@ def getSuitableResponses(text):
         tasks = q.checkSpecificTaskDatePeriod(u.keyword, startdate, enddate)
         toReturn = ""
         for task in tasks:
-            toReturn += str(task) + "\n"
+            toReturn += str(task) + "<br>"
         return toReturn
     elif (ret == 5):
         # Lokit Deadline   
         deadline = q.getDeadline(u.kodematkul, u.keyword)
         toReturn = ""
         for date in deadline:
-            toReturn += str(date) +"\n"
+            toReturn += str(date) +"<br>"
         return toReturn
     elif (ret == 6):
         # Update
@@ -65,29 +65,29 @@ def getSuitableResponses(text):
     elif(ret == 8):
         # Help
         retval = '''
-        Hi!
-        AastroBot adalah asisten pencatan tugas tugas kamu, biar kagak kelewat deadline mulu
-        [Feature] 
-        1. Menambahkan task baru
-        2. Melihat daftar task
-        3. Melihat deadline untuk task tertentu
-        4. Memperbarui task
-        5. Menghapus task
+        Hi!<br>
+        AastroBot adalah asisten pencatan tugas tugas kamu, biar kagak kelewat deadline mulu<br><br>
+        [Feature] <br>
+        1. Menambahkan task baru<br>
+        2. Melihat daftar task<br>
+        3. Melihat deadline untuk task tertentu<br>
+        4. Memperbarui task<br>
+        5. Menghapus task<br><br>
 
-        [Keyword list]
-        1. Kuis
-        2. Ujian
-        3. Tucil
-        4. Tubes
-        5. PR
-        6. Praktikum
+        [Keyword list]<br>
+        1. Kuis<br>
+        2. Ujian<br>
+        3. Tucil<br>
+        4. Tubes<br>
+        5. PR<br>
+        6. Praktikum<br>
         '''
         return retval
     else:
         return """Maaf pesan tidak dikenali, anda dapat menuliskan "Apa yang bisa bot lakukan" untuk mengetahui daftar fitur"""
 
 if __name__ == "__main__":
-    q.checkTasks()
+    print(type(q.checkTasks()))
     print("Masukkan pesan: ", end = "")
     text = "Apa yang bot bisa lakukan?"
     # toInput = input()
