@@ -10,10 +10,13 @@ def getSuitableResponses(text):
     if (ret == 1):
         # Add Task
         if (q.addTaskThroughBot(u.tanggal, u.keyword, u.topik, u.kodematkul)):
-            return "Added"
+            idx = q.getLastId()
+            toReturn = "Task Added\n" + "(ID:" + str(idx) + ") " + \
+                str(u.tanggal) + " - " + str(u.kodematkul) + " - " + \
+                str(u.keyword) + " - " + str(u.topik)
+            return toReturn
         else:
-            print("not added")
-            return "not Added"
+            return "Nothing Added, Try Again"
     elif (ret == 2):
         # Melihat daftar task
         q.checkTasks()
