@@ -138,7 +138,9 @@ def inspectQuery(S):
     elif (deadline != -1 and keyword != -1 and kodematkul != -1):
         return 5
     elif (deadline != -1 or keyword != -1):
-        if (tanggal_period == -1 and keyword == -1):
+        if (isHelp(S)):
+            return 8
+        elif (tanggal_period == -1 and keyword == -1):
             return 2
         elif (tanggal_period != -1 and keyword == -1) :
             return 3
@@ -148,7 +150,7 @@ def inspectQuery(S):
     elif (isUpdate(S)):
         return 6
     elif (isRemove(S)):
-        return 7        
+        return 7     
     else:
         return -1
 
@@ -175,6 +177,14 @@ def isRemove(S):
     delete dari task
     '''
     return kmp(S,"selesai mengerjakan") != -1 and bm(S,"selesai mengerjakan") != -1
+
+def isHelp(S):
+    '''
+    Mengembalikan true jika terdapat kata 'bisa lakukan' 'aastrobot' 'help'
+    delete dari task
+    '''
+    helpflag1 = bm(S,"bisa lakukan")
+    return helpflag1 != -1 and keyword == -1 and tanggal == -1
 
 if __name__ == "__main__":
     kalimat = 'Halo bot, task ong ingetin aku ya ada pada  14/12/2021 14/10/2021 tubes if2211 bab 2 sampai 3 cacatt loo'

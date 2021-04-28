@@ -57,6 +57,27 @@ def getSuitableResponses(text):
             return "Berhasil menghapuskan task ke "+str(task_id)+" pada daftar task"
         else:
             return "Tidak terdapat task ke "+str(task_id)+" pada daftar task"
+    elif(ret == 8):
+        # Help
+        return 
+        '''
+        Hi!
+        AastroBot adalah asisten pencatan tugas tugas kamu, biar kagak kelewat deadline mulu
+        [Feature] 
+        1. Menambahkan task baru
+        2. Melihat daftar task
+        3. Melihat deadline untuk task tertentu
+        4. Memperbarui task
+        5. Menghapus task
+
+        [Keyword list]
+        1. Kuis
+        2. Ujian
+        3. Tucil
+        4. Tubes
+        5. PR
+        6. Praktikum
+        '''
     else:
         return """Maaf pesan tidak dikenali, anda dapat menuliskan "Apa yang bisa bot lakukan" untuk mengetahui daftar fitur"""
 
@@ -65,5 +86,6 @@ if __name__ == "__main__":
     print("Masukkan pesan: ", end = "")
     text = input()
     getSuitableResponses(text)
+    print(u.inspectQuery(text))
     print(u.tanggal,u.tanggal_period,u.keyword)
     # getSuitableResponses(text)
