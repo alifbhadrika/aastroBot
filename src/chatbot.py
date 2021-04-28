@@ -19,17 +19,29 @@ def getSuitableResponses(text):
             return "Nothing Added, Try Again"
     elif (ret == 2):
         # Melihat daftar task
-        q.checkTasks()
+        tasks = q.checkTasks()
+        toReturn = ""
+        for task in tasks:
+            toReturn += str(task) + "\n"
+        return toReturn
     elif (ret == 3):
         # Melihat daftar task di periode waktu start dan date
         startdate = u.tanggal_period[0]
         enddate = u.tanggal_period[1]
-        q.checkTaskDatePeriod(startdate, enddate)
+        tasks = q.checkTaskDatePeriod(startdate, enddate)
+        toReturn = ""
+        for task in tasks:
+            toReturn += str(task) + "\n"
+        return toReturn
     elif (ret == 4):
         # Melihat daftar task di periode waktu start dan date
         startdate = u.tanggal_period[0]
         enddate = u.tanggal_period[1]
-        q.checkSpecificTaskDatePeriod(u.keyword, startdate, enddate)
+        tasks = q.checkSpecificTaskDatePeriod(u.keyword, startdate, enddate)
+        toReturn = ""
+        for task in tasks:
+            toReturn += str(task) + "\n"
+        return toReturn
     elif (ret == 5):
         # Lokit Deadline   
         deadline = q.getDeadline(u.kodematkul, u.keyword)

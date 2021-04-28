@@ -57,9 +57,10 @@ def checkTasks():
     FROM tasks
     """)
     res = c.fetchall()
-    print(res)
+    #print(res)
     conn.commit()
     conn.close()
+    return res
 
 def getDeadline(kodematkul, keyword):
     db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
@@ -143,9 +144,10 @@ def checkTaskDatePeriod(startdate, enddate):
     c = conn.cursor()
     c.execute("SELECT * FROM tasks WHERE tanggal BETWEEN ? AND ?",(startdate, enddate,))
     res = c.fetchall()
-    print(res)
+    #print(res)
     conn.commit()
     conn.close()
+    return res
 
 def checkSpecificTaskDatePeriod(task, startdate, enddate):
     db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
@@ -153,9 +155,10 @@ def checkSpecificTaskDatePeriod(task, startdate, enddate):
     c = conn.cursor()
     c.execute("SELECT * FROM tasks WHERE jenis_tugas = ? AND (tanggal BETWEEN ? AND ?)",(task, startdate, enddate,))
     res = c.fetchall()
-    print(res)
+    #print(res)
     conn.commit()
     conn.close()
+    return res
 
 if __name__ == "__main__":
     # create_db()
@@ -168,7 +171,7 @@ if __name__ == "__main__":
         x = int(input())
         if (x == 0):
             entry = input().split()
-            addTask(entry)
+            #addTask(entry)
             checkTasks()
         elif (x==1):
             id, tanggal = input().split()
