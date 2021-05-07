@@ -23,7 +23,10 @@ def getSuitableResponses(text):
         toReturn = ""
         for task in tasks:
             toReturn += str(task) + "<br>"
-        return toReturn
+        if(toReturn != ""):
+            return toReturn
+        else:
+            return "Tidak terdapat task"
     elif (ret == 3):
         # Melihat daftar task di periode waktu start dan date
         startdate = u.tanggal_period[0]
@@ -32,7 +35,10 @@ def getSuitableResponses(text):
         toReturn = ""
         for task in tasks:
             toReturn += str(task) + "<br>"
-        return toReturn
+        if(toReturn != ""):
+            return toReturn
+        else:
+            return "Tidak terdapat task pada periode yang telah ditentukan"
     elif (ret == 4):
         # Melihat daftar task di periode waktu start dan date
         startdate = u.tanggal_period[0]
@@ -41,14 +47,20 @@ def getSuitableResponses(text):
         toReturn = ""
         for task in tasks:
             toReturn += str(task) + "<br>"
-        return toReturn
+        if(toReturn != ""):
+            return toReturn
+        else:
+            return "Tidak terdapat task pada periode yang telah ditentukan"
     elif (ret == 5):
         # Lokit Deadline   
         deadline = q.getDeadline(u.kodematkul, u.keyword)
         toReturn = ""
         for date in deadline:
             toReturn += str(date) +"<br>"
-        return toReturn
+        if(toReturn != ""):
+            return toReturn
+        else:
+            return "Tidak terdapat task pada waktu yang telah ditentukan"
     elif (ret == 6):
         # Update
         if (q.updateTask(u.task_id,u.tanggal)):
@@ -86,11 +98,11 @@ def getSuitableResponses(text):
         return """Maaf pesan tidak dikenali, anda dapat menuliskan "Apa yang bisa bot lakukan" untuk mengetahui daftar fitur"""
 
 if __name__ == "__main__":
-    print(type(q.checkTasks()))
-    print("Masukkan pesan: ", end = "")
-    text = "Apa yang bot bisa lakukan?"
+    # print(type(q.checkTasks()))
+    # print("Masukkan pesan: ", end = "")
+    text = "deadline hari ini"
     # toInput = input()
-    # print(getSuitableResponses(toInput))
+    print(getSuitableResponses(text))
     # print(u.inspectQuery(text))
     # print(u.tanggal,u.tanggal_period,u.keyword)
     # getSuitableResponses(text)

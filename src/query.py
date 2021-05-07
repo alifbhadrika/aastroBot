@@ -102,6 +102,7 @@ def updateTask(id_task, tanggal):
     c = conn.cursor()
     updated = True
     try:
+        c.execute("SELECT FROM tasks WHERE id_task = ?", (id_task,))
         c.execute("UPDATE tasks SET tanggal = ? WHERE id_task = ?", (tanggal, id_task,))
         print("Berhasil mengupdate task", end=" ")
         print(id_task, end=" dari data tasks")
@@ -112,13 +113,12 @@ def updateTask(id_task, tanggal):
     return updated
     
 def removeTask(id_task):
-    print(id_task)
-    print(type(id_task))
     db = os.path.join(os.path.dirname(__file__), '..\\test\\aastrobot.db')
     conn = sqlite3.connect(db)
     c = conn.cursor()
     removed = True
     try:
+        c.execute("SELECT FROM tasks WHERE id_task = ?", (id_task,))        
         c.execute("DELETE FROM tasks WHERE id_task = ?", (id_task,))
         print("Berhasil menghapuskan task", end=" ")
         print(id_task, end=" dari data tasks")    

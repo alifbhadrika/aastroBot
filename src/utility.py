@@ -135,29 +135,29 @@ def inspectQuery(S):
     deadline = kmp(S,"deadline") or bm(S,"deadline")
 
     if (isAdded()):
-        print(1)
+        # print(1)
         return 1
     elif (deadline != -1 and keyword != -1 and kodematkul != -1):
-        print(5)
+        # print(5)
         return 5
     elif (deadline != -1):
         if (tanggal != -1 and task_id != -1):
-            print(6)
+            # print(6)
             return 6
         elif (tanggal_period == -1 and keyword == -1):
-            print(2)
+            # print(2)
             return 2
         elif (tanggal_period != -1 and keyword == -1):
-            print(3)
+            # print(3)
             return 3
         elif (tanggal_period != -1 and keyword != -1) :
-            print(4)
+            # print(4)
             return 4
     elif (isRemove(S)):
-        print(7)
+        # print(7)
         return 7     
     elif (isHelp(S)):
-        print(8)        
+        # print(8)        
         return 8
     else:
         return -1
